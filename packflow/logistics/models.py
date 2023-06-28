@@ -6,6 +6,16 @@ class Customer(models.Model):
     address = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.name
+
+class Carrier(models.Model):
+    name = models.CharField(max_length=100)
+    vehicle_type = models.CharField(max_length=50)
+    contact_number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
 
 class Package(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='packages')
@@ -14,11 +24,10 @@ class Package(models.Model):
     origin_address = models.CharField(max_length=200)
     destination_address = models.CharField(max_length=200)
     delivery_status = models.CharField(max_length=20)
+    carrier = models.ForeignKey(Carrier, on_delete=models.CASCADE, related_name='packages')
 
 
-class Carrier(models.Model):
-    name = models.CharField(max_length=100)
-    vehicle_type = models.CharField(max_length=50)
-    contact_number = models.CharField(max_length=20)
-    packages = models.ManyToManyField(Package, related_name='carriers')
+
+
+
 
