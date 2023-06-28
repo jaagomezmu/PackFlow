@@ -1,9 +1,12 @@
 from django.views.generic import ListView
 from django.views.generic.edit import (CreateView, DeleteView, FormMixin,
                                        UpdateView)
+from logistics.api.serializers import (CarrierSerializer, CustomerSerializer,
+                                       PackageSerializer)
+from rest_framework.viewsets import ModelViewSet
 
 from .forms import PackageByCarrierForm, PackageByCustomerForm, PackageForm
-from .models import Carrier, Package
+from .models import Carrier, Customer, Package
 
 
 class CustomerPackagesView(ListView, FormMixin):
@@ -48,3 +51,14 @@ class PackageDeleteView(DeleteView):
     template_name = 'logistics/package_delete.html'
     success_url = '/logistics/package-list/'
 
+class CustomerViewSet(ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+class PackageViewSet(ModelViewSet):
+    queryset = Package.objects.all()
+    serializer_class = PackageSerializer
+
+class CarrierViewSet(ModelViewSet):
+    queryset = Carrier.objects.all()
+    serializer_class = CarrierSerializer
