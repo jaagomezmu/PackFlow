@@ -81,7 +81,7 @@ python manage.py runserver
 
 ## How to run the node server
 
-1. Install npm in your machine, depends of tour OS
+1. Install npm in your machine, depends of your OS
 2. Change to 'node-poject/'
 3. Execute:
 
