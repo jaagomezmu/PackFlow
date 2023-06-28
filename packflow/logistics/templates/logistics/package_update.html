@@ -1,0 +1,14 @@
+{% extends "includes/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+  <h2 class="text-center">Update Package</h2>
+  <br>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{% url 'logistics:package_list' %}">Cancel</a>
+  </form>
+{% endblock %}

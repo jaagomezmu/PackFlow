@@ -1,0 +1,38 @@
+{% extends "includes/header.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+    <h1>Carrier Packages</h1>
+    <form method="GET">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <br>
+    <div style="border: 1px solid black; padding: 10px;">
+        <ul>
+            <br>
+            {% if packages|length > 0 %}
+                <h3>For carrier: <u>{{ packages.0.customer.name }}</u></h3>
+                {% for package in packages %}
+                    <br>
+                    <hr>
+                    <li>ID: {{ package.id }}</li>
+                    <li>Weight: {{ package.weight }}</li>
+                    <li>Dimensions: {{ package.dimensions }}</li>
+                    <li>origin_address: {{ package.origin_address }}</li>
+                    <li>destination_address: {{ package.destination_address }}</li>
+                    <li>delivery_status: {{ package.delivery_status }}</li>
+                {% empty %}
+                    <br>
+                    <h6>No packages found.</u></h6>
+                {% endfor %}
+                {% endif %}
+            
+        </ul>
+    </div>
+    <br>
+    <br>
+{% endblock %}

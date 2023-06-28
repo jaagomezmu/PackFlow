@@ -1,0 +1,38 @@
+{% extends "includes/header.html" %}
+
+{% block content %}
+
+
+  <h2 class="text-center">Package list</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Weight</th>
+        <th>Dimensions</th>
+        <th>Origin Address</th>
+        <th>Destination Address</th>
+        <th>Delivery Status</th>
+        <th>Carrier</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for package in packages %}
+        <tr>
+          <td>{{ package.customer }}</td>
+          <td>{{ package.weight }}</td>
+          <td>{{ package.dimensions }}</td>
+          <td>{{ package.origin_address }}</td>
+          <td>{{ package.destination_address }}</td>
+          <td>{{ package.delivery_status }}</td>
+          <td>{{ package.carrier }}</td>
+          <td>
+            <a href="{% url 'logistics:package_update' package.pk %}" class="btn btn-primary btn-sm">Update</a>
+            <a href="{% url 'logistics:package_delete' package.pk %}" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
