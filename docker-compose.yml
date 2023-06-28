@@ -1,0 +1,29 @@
+version: '3'
+services:
+  django:
+    build: ./packflow 
+    ports:
+      - 8000:8000  
+    depends_on:
+      - db
+    entrypoint: /app/server-entrypoint.sh
+    environment:
+      DEBUG: "True"
+      POSTGRES_HOST: db
+      POSTGRES_NAME: postgres
+      POSTGRES_USER: packflow_user
+      POSTGRES_PASSWORD: packflow_password
+      POSTGRES_PORT: 5432
+
+  node:
+    build: ./node-project
+    ports:
+      - 3000:3000
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: your-database-name
+      POSTGRES_USER: your-username
+      POSTGRES_PASSWORD: your-password
